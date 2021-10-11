@@ -25,6 +25,6 @@ for _ in 0..<n {
     }
 
     if checker.count != 0 { output += 1}
-
-    print(output)
 }
+
+print(output)
