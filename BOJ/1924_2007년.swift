@@ -2,7 +2,7 @@
 //  1924_2007년.swift
 //  
 //
-//  Created by Chan on 2021/12/01.
+//  Created by Chan on 2021/10/29.
 //
 //  https://www.acmicpc.net/problem/1924
 //
