@@ -1,8 +1,8 @@
 //
 //  2422_별_찍기_반전.swift
-//  
 //
-//  Created by Chan on 2021/12/01.
+//
+//  Created by Chan on 2021/11/01.
 //
 //  https://www.acmicpc.net/problem/2442
 // 별찍기 - 5 반전
