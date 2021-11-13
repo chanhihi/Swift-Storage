@@ -6,7 +6,8 @@
 //
 //  https://www.acmicpc.net/problem/11726
 
-//MARK: - solution 함수
+//MARK: - Top-Down solution 함수
+//재귀방식
 
 func solution(){
     let n = Int(readLine()!)!
@@ -28,4 +29,17 @@ func solution(){
 
 solution()
 
-//MARK: - 
+//MARK: - Bottom-Up 저장
+//만들어두고 호출
+
+let n = Int(readLine()!)!
+var d: [Int] = [Int](repeating: 0, count: 1001)
+let mod = 10007
+
+d[1] = 1
+d[2] = 2
+
+for i in 3...1000 {
+    d[i] = (d[i-1] + d[i-2]) % mod
+}
+print(d[n])
