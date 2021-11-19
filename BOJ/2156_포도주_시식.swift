@@ -7,7 +7,7 @@
 //  https://www.acmicpc.net/problem/2156
 
 
-// MARK: - dp[i-2] + input[i], dp[i-3] + input[i] + input[i-1], dp[i-1] 
+// MARK: - dp[i-2] + input[i], dp[i-3] + input[i] + input[i-1], dp[i-1]
 
 let n = Int(readLine()!)!
 var input = [0]
