@@ -86,3 +86,5 @@ func solution(_ numberString:String, _ k:Int) -> String {
     
     return deletedStringList.dropLast(deleteCount).map(String.init).joined()
 }
+
+// dropLast() 안에있는 갯수만큼 뒤에서 부터 삭제
