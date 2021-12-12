@@ -43,3 +43,26 @@ func deleteNext(_ s: inout [Character], _ index: Int) {
 }
 
 solution("baabaa")
+
+// MARK: - 효율성 고려 스택으로 문제 해결
+
+func solution(_ s: String) -> Int {
+    var charStack = [Character]()
+    var lastChar: Character? = nil
+
+    for char in [Character](s) {
+        if lastChar != nil && char == lastChar {
+            charStack.removeLast()
+            lastChar = charStack.last
+        } else {
+            charStack.append(char)
+            lastChar = char
+        }
+    }
+    if charStack.isEmpty {
+        return 1
+    } else {
+        return 0
+    }
+}
+
