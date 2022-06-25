@@ -2,7 +2,7 @@
 ###### 📖 Repositories written in Swift language
 -----------------------------------------
 ### [BOJ(Baekjoon Online Judge)][MyBOJlink]
-[MyBOJlink]: https://github.com/chanhihi/Swift-Storage/tree/main/BOJ "BOJ"
+[MyBOJlink]: https://github.com/chanhihi/Swift-Storage/tree/main/BOJ#bojbaekjoon-online-judge "BOJ"
   + 알고리즘 백준 문제 저장소
 
 ### [Programmers][MyPGlink]
