@@ -1,9 +1,7 @@
 # BOJ(Baekjoon Online Judge)
+[![solved.ac tier](http://mazassumnida.wtf/api/v2/generate_badge?boj=chanhihi)](https://solved.ac/chanhihi)
 ##### 알고리즘 백준 문제 저장소 (문제 번호순 정렬)
 ##### 문제 유형별 정렬로 업데이트 예정
-
-[![solved.ac tier](http://mazassumnida.wtf/api/v2/generate_badge?boj=chanhihi)](https://solved.ac/chanhihi)
-
 * * *
 |No|문제 번호|추천|문제 이름|문제 유형|비고|
 |:---|:---:|:---:|:---:|:---:|---:|
