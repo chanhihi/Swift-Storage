@@ -22,20 +22,25 @@ func solution(_ s:String) -> Int {
 let brackets = ["{":"}", "(":")", "[":"]"]
 func isCorrect(_ s:String) -> Bool {
 	var stack = [String]()
-	for bracket in s {
-		if brackets.keys.contains(String(bracket)) {
-			stack.append(String(bracket))
-		}else {
-			if !stack.isEmpty {
-				if brackets[stack.last!] != String(bracket) {
+	for word in s {
+		if brackets.keys.contains(String(word)) {	// {,(,[
+			stack.append(String(word))	// {,(,[
+		} else {
+			if !stack.isEmpty {	// not empty
+				if brackets[stack.last!] != String(word) {	// word key값.
 					return false
-				}else {
+				} else {
 					stack.removeLast()
 				}
-			}else {
+			} else {
 				return false
 			}
 		}
 	}
 	return stack.isEmpty ? true : false
 }
+
+print(solution("[](){}"))//	3
+print(solution("}]()[{"))//	2
+print(solution("[)(]"))//	0
+print(solution("}}}"))//	0
