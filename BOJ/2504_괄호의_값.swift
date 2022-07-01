@@ -6,7 +6,7 @@
 //
 //	https://www.acmicpc.net/submit/2504
 //
-//	MARK: - 스택구조 기본
+//	MARK: - 스택구조 기본 // 괄호 처리
 let x = readLine()!.map{String($0)}
 var charStack = [Character]()
 var lastChar: Character? = nil
