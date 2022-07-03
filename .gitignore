@@ -1,0 +1,5 @@
+# git ignore
+*/.DS_Store
+*.swp
+*.DS_Store
+needRefactoring/
