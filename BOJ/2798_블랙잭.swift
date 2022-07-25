@@ -16,9 +16,7 @@ func cardSum(_ depth:Int,_ cur:Int, _ sum:Int) {
 //		print(maxResult, sum)
 		maxResult = max(maxResult, sum)
 		return
-	} else if sum > M {
-		return
-	}
+	} else if sum > M { return }
 	for i in cur..<N-1 {
 		cardSum(depth+1, i+1, sum+m[i+1])
 	}
