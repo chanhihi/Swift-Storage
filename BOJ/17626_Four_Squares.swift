@@ -25,3 +25,4 @@ func solution(_ number: Double) -> Int {
 }
 
 print(solution(Double(readLine()!)!))
+
