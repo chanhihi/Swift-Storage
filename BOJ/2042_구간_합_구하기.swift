@@ -45,9 +45,7 @@ class SegmentTree<T> {
 		self.init(array: array, leftBounds: 0, rightBounds: array.count-1, function: function)
 	}
 	
-	// O(logN)
 	func query(withLeftBounds leftBounds: Int, rightBounds: Int) -> T {
-		// left, right가 모두 일치 -> 자기 value 리턴
 		if self.leftBounds == leftBounds, self.rightBounds == rightBounds {
 			return value
 		}
@@ -56,17 +54,14 @@ class SegmentTree<T> {
 			  let rightChild = rightChild
 		else { fatalError() }
 		
-		// 왼쪽자식의 오른쪽이 left보다 작다. -> 오른쪽 자식에 모두 포함되므로 오른쪽부터 다시
 		if leftChild.rightBounds < leftBounds {
 			return rightChild.query(withLeftBounds: leftBounds, rightBounds: rightBounds)
 		}
 		
-		// 오른쪽자식의 왼쪽이 right보다 크다. -> 왼쪽 자식에 모두 포함되므로 왼쪽부터 다시
 		else if rightChild.leftBounds > rightBounds {
 			return leftChild.query(withLeftBounds: leftBounds, rightBounds: rightBounds)
 		}
 		
-		// 양쪽 자식들에 걸쳐져 있음 -> (leftBounds ~ leftChild.right) + (rightChild.left ~ rightBounds)
 		else {
 			let leftValue = leftChild.query(withLeftBounds: leftBounds, rightBounds: leftChild.rightBounds)
 			let rightValue = rightChild.query(withLeftBounds: rightChild.leftBounds, rightBounds: rightBounds)
@@ -74,7 +69,6 @@ class SegmentTree<T> {
 		}
 	}
 	
-	// O(logN)
 	func replaceItem(at index: Int, withItem item: T) {
 		if leftBounds == rightBounds {
 			value = item
