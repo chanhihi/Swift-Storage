@@ -5,6 +5,8 @@
 //  Created by Chan on 2022/07/19.
 //
 //	https://www.acmicpc.net/problem/15829
+//
+//	MARK: - Hash
 
 readLine()
 let mod = 1234567891
