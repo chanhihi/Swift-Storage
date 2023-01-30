@@ -8,6 +8,17 @@
 //
 //	MARK: - 에라토스테네스의 체 / 누적 합
 
+let accumulate = accumulateSum()
+
+func solution() {
+	let T = Int(readLine()!)!
+
+	for _ in 0..<T {
+		let num = Int(readLine()!)!
+		print(accumulate[num])
+	}
+}
+
 func accumulateSum() -> [Int] {
 	var div = Array(repeating: 0, count: 1000001)
 	var sum = Array(repeating: 0, count: 1000001)
@@ -25,13 +36,5 @@ func accumulateSum() -> [Int] {
 	}
 
 	return sum
-}
-
-let accumulate = accumulateSum()
-let T = Int(readLine()!)!
-
-for _ in 0..<T {
-	let num = Int(readLine()!)!
-	print(accumulate[num])
 }
 
