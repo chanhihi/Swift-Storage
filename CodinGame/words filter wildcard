@@ -1,0 +1,10 @@
+var sentence = readLine()!.split{$0==" "}.map{String($0)}
+var words = readLine()!.split{$0==" "}.map{String($0).lowercased()}
+
+for (i,v) in sentence.enumerated() {
+    if words.contains(v.lowercased()) {
+        sentence[i] = Array(repeating: "*", count: v.count).joined()
+    }
+}
+
+print(sentence.joined(separator: " "))
