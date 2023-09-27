@@ -1,5 +1,5 @@
 //
-//  선택 정렬.swift
+//  삽입 정렬.swift
 //  algorithms
 //
 //  Created by 김찬희 on 2023/09/27.
