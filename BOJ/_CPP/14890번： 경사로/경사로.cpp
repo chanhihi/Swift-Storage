@@ -1,10 +1,8 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 vector<vector<int>> board;
-int n, l;
-int result = 0;
+int n, l, result = 0;
 
 void input() {
   for (int i = 0; i < n; i++) {
@@ -14,92 +12,64 @@ void input() {
   }
 }
 
-void output() {
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-      cout << board[i][j];
-    }
-    cout << "\n";
-  }
-}
+bool checkLine(vector<int>& line) {
+  vector<bool> used(n, false);
 
-vector<vector<int>> rotateBoard() {
-  vector<vector<int>> newBoard(n, vector<int>(n));
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-      newBoard[j][n - 1 - i] = board[i][j];
-    }
-  }
-  return newBoard;
-}
+  for (int i = 0; i < n - 1; i++) {
+    int diff = line[i + 1] - line[i];
 
-void checkLine(vector<int> line) {
-  int prev = line[0];
-  vector<int> upDown(n);
-
-  for (int i = 1; i < n; i++) {
-    int h = abs(prev - line[i]);
-
-    if (h > 1) {
-      return;
-    } else if (h > 0) {
-      if (i < l) {
-        return;
-      }
-
-      for (int j = i; j < l + i; j++) {
-        if (j >= n) {
-          return;
+    if (diff == 0) {
+      continue;
+    } else if (diff == 1) {
+      for (int j = 0; j < l; j++) {
+        if (i - j < 0 || line[i - j] != line[i] || used[i - j]) {
+          return false;
         }
-        upDown[j] = 1;
+        used[i - j] = true;
       }
-      prev = line[i];
-    }
-  }
-
-  reverse(line.begin(), line.end());
-  for (int i = 1; i < n; i++) {
-    int h = abs(prev - line[i]);
-
-    if (h > 1) {
-      return;
-    } else if (h > 0) {
-      if (i < l) {
-        return;
-      }
-      for (int j = i; j < l + i; j++) {
-        if (j >= n) {
-          return;
+    } else if (diff == -1) {
+      for (int j = 1; j <= l; j++) {
+        if (i + j >= n || line[i + j] != line[i + 1] || used[i + j]) {
+          return false;
         }
-        upDown[j] = 1;
+        used[i + j] = true;
       }
-      prev = line[i];
+    } else {
+      return false;
     }
   }
 
-  if (*max_element(upDown.begin(), upDown.end()) < 2) {
-    result++;
-  }
+  return true;
 }
 
-void checkUpDown() {
+void checkPaths() {
   for (int i = 0; i < n; i++) {
-    checkLine(board[i]);
+    if (checkLine(board[i])) {
+      result++;
+    }
+  }
+
+  for (int j = 0; j < n; j++) {
+    vector<int> line(n);
+    for (int i = 0; i < n; i++) {
+      line[i] = board[i][j];
+    }
+    if (checkLine(line)) {
+      result++;
+    }
   }
 }
 
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  cout.tie(nullptr);
 
   cin >> n >> l;
   board.resize(n, vector<int>(n));
-
   input();
-  checkUpDown();
-  board = rotateBoard();
-  checkUpDown();
+
+  checkPaths();
   cout << result;
+
   return 0;
 }
