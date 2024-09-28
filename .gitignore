@@ -11,7 +11,13 @@
 
 # 확장자 없는 파일 무시 ---->
 
+# <---- boj
+*.bin
 boj/**/*.md
+*.prob
+*.exe
+*.out
+# boj ---->
 
 # git ignore
 */.DS_Store
