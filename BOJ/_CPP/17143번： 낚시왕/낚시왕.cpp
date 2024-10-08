@@ -1,15 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                      :::    :::    :::     */
-/*   Problem Number: 17143                             :+:    :+:      :+:    */
-/*                                                    +:+    +:+        +:+   */
-/*   By: chanhihi <boj.kr/u/chanhihi>                +#+    +#+          +#+  */
-/*                                                  +#+      +#+        +#+   */
-/*   https://boj.kr/17143                          #+#        #+#      #+#    */
-/*   Solved: 2024/10/08 14:29:21 by chanhihi      ###          ###   ##.kr    */
-/*                                                                            */
-/* ************************************************************************** */
-
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -19,31 +8,36 @@ struct Shark {
   int r, c, s, d, z;
 };
 
-int dx[] = {0, 0, 0, 1, -1};
+bool compareByRC(const Shark &a, const Shark &b) {
+  if (a.r == b.r) {
+    return a.c < b.c;
+  }
+  return a.r < b.r;
+}
+
 int dy[] = {0, -1, 1, 0, 0};
+int dx[] = {0, 0, 0, 1, -1};
 
 int main() {
   int br, bc, m;
   cin >> br >> bc >> m;
   vector<Shark> sharks;
   for (int i = 0; i < m; i++) {
-    // (r, c)는 상어의 위치, s는 속력, d는 이동 방향, z는 크기
     int r, c, s, d, z;
     cin >> r >> c >> s >> d >> z;
     sharks.push_back({r, c, s, d, z});
   }
-  int fisher = 1;
-  int result = 0;
 
-  for (int i = 1; i <= bc; i++) {
-    // 낚시꾼 움직이면서 상어잡기
+  int result = 0;
+  for (int fisher = 1; fisher <= bc; fisher++) {
+    sort(sharks.begin(), sharks.end(), compareByRC);
     for (auto &s : sharks) {
+      if (s.r == 0 && s.c == 0) continue;
       bool catched = false;
-      if (i == s.r) {
+      if (fisher == s.c) {
         for (int j = 1; j <= br; j++) {
-          if (j == s.c) {
+          if (j == s.r) {
             result += s.z;
-            // 현재 벡터의 요소를 제거하기.
             s.r = 0;
             s.c = 0;
             catched = true;
@@ -53,24 +47,54 @@ int main() {
         if (catched) break;
       }
     }
-    // 상어 움직이기
-    vector<vector<int>> sharkBoard(br, vector<int>(bc, 0));
-    for (auto s : sharks) {
-      if (s.r == 0 && s.c == 0) continue;
-      int nr = s.r + dx[s.d] * s.s;
-      int nc = s.c + dy[s.d] * s.s;
 
-      if (nr < 1) s.r = 1;
-      if (nc < 1) s.c = 1;
-      if (nr > br) s.c = br;
-      if (nc > bc) s.c = bc;
-      if (sharkBoard[s.r][s.c] > s.z) {
+    vector<vector<Shark>> sharkBoard(br + 1,
+                                     vector<Shark>(bc + 1, {0, 0, 0, 0, 0}));
+    for (auto &s : sharks) {
+      if (s.r == 0 && s.c == 0) continue;
+
+      int speed = s.s;
+      if (s.d == 1 || s.d == 2) {
+        speed %= (2 * (br - 1));
+      } else {
+        speed %= (2 * (bc - 1));
+      }
+
+      while (speed--) {
+        s.r = s.r + dy[s.d];
+        s.c = s.c + dx[s.d];
+
+        if (s.d == 1 && s.r == 0) {
+          s.d = 2;
+          s.r = 2;
+        } else if (s.d == 2 && s.r == br + 1) {
+          s.d = 1;
+          s.r = br - 1;
+        } else if (s.d == 3 && s.c == bc + 1) {
+          s.d = 4;
+          s.c = bc - 1;
+        } else if (s.d == 4 && s.c == 0) {
+          s.d = 3;
+          s.c = 2;
+        }
+      }
+
+      if (sharkBoard[s.r][s.c].z > s.z) {
         s.r = 0;
         s.c = 0;
+      } else {
+        sharkBoard[s.r][s.c] = s;
       }
     }
-
-    cout << result;
+    sharks.clear();
+    for (int i = 1; i <= br; i++) {
+      for (int j = 1; j <= bc; j++) {
+        if (sharkBoard[i][j].z > 0) {
+          sharks.push_back(sharkBoard[i][j]);
+        }
+      }
+    }
   }
+  cout << result;
   return 0;
 }
